@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1478,2055" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1794,2436" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="40">
+    <scg:List x:TypeArguments="x:String" Capacity="80">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -41,6 +41,7 @@
       <x:String>UiPath.Excel.Activities.Business</x:String>
       <x:String>UiPath.Shared.Activities</x:String>
       <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -76,7 +77,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="552,1990" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap:VirtualizedContainerService.HintSize="1115,2371" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strJson" />
       <Variable x:TypeArguments="njl:JObject" Name="JsonObject" />
@@ -87,11 +88,9 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Get the city names from an Excel file and output the cities in a DataTable format" DisplayName="Invoke GetCityNames workflow" sap:VirtualizedContainerService.HintSize="510,154" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="GetCityNames.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Get the city names from an Excel file and output the cities in a DataTable format" DisplayName="Invoke GetCityNames workflow" sap:VirtualizedContainerService.HintSize="1073,154" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="GetCityNames.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtExcelTable">
-          <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dtExcelTable" />
-        </OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtExcelTable">[dtExcelTable]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -99,23 +98,27 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtExcelTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="510,1704" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtExcelTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="1073,2085" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,1584" sap2010:WorkflowViewState.IdRef="Sequence_10">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1039,1965" sap2010:WorkflowViewState.IdRef="Sequence_10">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="strCityName" />
-              <Variable x:TypeArguments="x:Int32" Name="intStatusCode" />
+              <Variable x:TypeArguments="x:String" Name="ApiKey">
+                <Variable.Default>
+                  <Literal x:TypeArguments="x:String">74e8a5b8a6837f0725ea01dd06f26fed</Literal>
+                </Variable.Default>
+              </Variable>
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign sap2010:Annotation.AnnotationText="Take the city name stored in the first column of the DataTable, and store it in a variable to use in the HTTP request" DisplayName="Assign CityName Variable" sap:VirtualizedContainerService.HintSize="434,117" sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign sap2010:Annotation.AnnotationText="Take the city name stored in the first column of the DataTable, and store it in a variable to use in the HTTP request" DisplayName="Assign CityName Variable" sap:VirtualizedContainerService.HintSize="997,117" sap2010:WorkflowViewState.IdRef="Assign_2">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[strCityName]</OutArgument>
               </Assign.To>
@@ -128,8 +131,8 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </Assign>
-            <ui:LogMessage DisplayName="Log Current City" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Searching for: &quot; + strCityName]" />
-            <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="ANY" sap2010:Annotation.AnnotationText="Make a new API call with the current city name to retrieve the current weather in that area" BodyFormat="application/xml" DisplayName="Call OpenWeather API" EnableSSLVerification="True" EndPoint="https://api.openweathermap.org/data/2.5/weather" sap:VirtualizedContainerService.HintSize="434,94" sap2010:WorkflowViewState.IdRef="HttpClient_2" Method="GET" Result="[strJson]" StatusCode="[intStatusCode]" TimeoutMS="6000">
+            <ui:LogMessage DisplayName="Log Current City" sap:VirtualizedContainerService.HintSize="997,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Searching for: &quot; + strCityName]" />
+            <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" StatusCode="{x:Null}" Username="{x:Null}" AcceptFormat="ANY" sap2010:Annotation.AnnotationText="Make a new API call with the current city name to retrieve the current weather in that area" BodyFormat="application/xml" DisplayName="Call OpenWeather API" EnableSSLVerification="True" EndPoint="https://api.openweathermap.org/data/2.5/weather" sap:VirtualizedContainerService.HintSize="997,94" sap2010:WorkflowViewState.IdRef="HttpClient_2" Method="GET" Result="[strJson]" TimeoutMS="6000">
               <ui:HttpClient.Attachments>
                 <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
               </ui:HttpClient.Attachments>
@@ -140,10 +143,18 @@
                 <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
               </ui:HttpClient.Headers>
               <ui:HttpClient.Parameters>
-                <InArgument x:TypeArguments="x:String" x:Key="q">[strCityName]</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="appid">cae14cd5ec367ab0b24bd9949238f659</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="lang">en</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="units">imperial</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="q">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strCityName" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="appid">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="ApiKey" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="lang">
+                  <Literal x:TypeArguments="x:String">en</Literal>
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="units">
+                  <Literal x:TypeArguments="x:String">imperial</Literal>
+                </InArgument>
               </ui:HttpClient.Parameters>
               <ui:HttpClient.UrlSegments>
                 <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
@@ -154,39 +165,64 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:HttpClient>
-            <ui:DeserializeJson x:TypeArguments="njl:JObject" sap2010:Annotation.AnnotationText="Converts the JSON response from OpenWeather into an object we can work with" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="434,102" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_2" JsonObject="[JsonObject]" JsonString="[strJson]">
+            <ui:DeserializeJson x:TypeArguments="njl:JObject" sap2010:Annotation.AnnotationText="Converts the JSON response from OpenWeather into an object we can work with" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="997,102" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_2" JsonObject="[JsonObject]" JsonString="[strJson]">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:DeserializeJson>
-            <ui:UpdateRowItem ColumnName="{x:Null}" sap2010:Annotation.AnnotationText="Update the dtExcelTable Temperate column with the Temperate response from OpenWeather" ColumnIndex="1" DisplayName="Update Temperature Column" sap:VirtualizedContainerService.HintSize="434,232" sap2010:WorkflowViewState.IdRef="UpdateRowItem_7" Row="[CurrentRow]" Value="[JsonObject.SelectToken(&quot;main.temp&quot;).ToString]">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:UpdateRowItem>
-            <ui:UpdateRowItem ColumnName="{x:Null}" sap2010:Annotation.AnnotationText="Update the DataTable's &quot;Feels Like&quot; column with the feels_like response from Open Weather" ColumnIndex="2" DisplayName="Update Feels Like Column" sap:VirtualizedContainerService.HintSize="434,232" sap2010:WorkflowViewState.IdRef="UpdateRowItem_8" Row="[CurrentRow]" Value="[JsonObject.SelectToken(&quot;main.feels_like&quot;).ToString]">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:UpdateRowItem>
-            <ui:UpdateRowItem ColumnName="{x:Null}" sap2010:Annotation.AnnotationText="Update the DataTable's Humidity column with the Humidity response from Open Weather" ColumnIndex="3" DisplayName="Update Humidity Column" sap:VirtualizedContainerService.HintSize="434,232" sap2010:WorkflowViewState.IdRef="UpdateRowItem_9" Row="[CurrentRow]" Value="[JsonObject.SelectToken(&quot;main.humidity&quot;).ToString]">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:UpdateRowItem>
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke WriteExcelData workflow" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="WriteExcelData.xaml">
-              <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtExcelTable">[dtExcelTable]</InArgument>
-              </ui:InvokeWorkflowFile.Arguments>
-            </ui:InvokeWorkflowFile>
+            <ui:LogMessage DisplayName="Log HTTP Request Status" sap:VirtualizedContainerService.HintSize="997,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Trace" Message="[&quot;Status Code: &quot; + JsonObject.SelectToken(&quot;cod&quot;).ToString]" />
+            <If Condition="[JsonObject.SelectToken(&quot;cod&quot;).ToString = &quot;200&quot;]" sap:VirtualizedContainerService.HintSize="997,1178" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <Sequence DisplayName="Continue Updating Values" sap:VirtualizedContainerService.HintSize="476,1020" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:UpdateRowItem ColumnName="{x:Null}" sap2010:Annotation.AnnotationText="Update the dtExcelTable Temperate column with the Temperate response from OpenWeather" ColumnIndex="1" DisplayName="Update Temperature Column" sap:VirtualizedContainerService.HintSize="434,232" sap2010:WorkflowViewState.IdRef="UpdateRowItem_7" Row="[CurrentRow]" Value="[JsonObject.SelectToken(&quot;main.temp&quot;).ToString]">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:UpdateRowItem>
+                  <ui:UpdateRowItem ColumnName="{x:Null}" sap2010:Annotation.AnnotationText="Update the DataTable's &quot;Feels Like&quot; column with the feels_like response from Open Weather" ColumnIndex="2" DisplayName="Update Feels Like Column" sap:VirtualizedContainerService.HintSize="434,232" sap2010:WorkflowViewState.IdRef="UpdateRowItem_8" Row="[CurrentRow]" Value="[JsonObject.SelectToken(&quot;main.feels_like&quot;).ToString]">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:UpdateRowItem>
+                  <ui:UpdateRowItem ColumnName="{x:Null}" sap2010:Annotation.AnnotationText="Update the DataTable's Humidity column with the Humidity response from Open Weather" ColumnIndex="3" DisplayName="Update Humidity Column" sap:VirtualizedContainerService.HintSize="434,232" sap2010:WorkflowViewState.IdRef="UpdateRowItem_9" Row="[CurrentRow]" Value="[JsonObject.SelectToken(&quot;main.humidity&quot;).ToString]">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:UpdateRowItem>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke WriteExcelData workflow" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="WriteExcelData.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtExcelTable">[dtExcelTable]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="476,866" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="ERROR: City Not Found" sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Could not receive current weather for &quot; + strCityName + &quot;. Please input a different city.&quot;]" />
+                  <ui:UpdateRowItem ColumnName="{x:Null}" ColumnIndex="1" DisplayName="Update Row Item" sap:VirtualizedContainerService.HintSize="434,190" sap2010:WorkflowViewState.IdRef="UpdateRowItem_10" Row="[CurrentRow]" Value="[&quot;Not Found&quot;]" />
+                  <ui:UpdateRowItem ColumnName="{x:Null}" ColumnIndex="2" DisplayName="Update Row Item" sap:VirtualizedContainerService.HintSize="434,190" sap2010:WorkflowViewState.IdRef="UpdateRowItem_11" Row="[CurrentRow]" Value="[&quot;Not Found&quot;]" />
+                  <ui:UpdateRowItem ColumnName="{x:Null}" ColumnIndex="3" DisplayName="Update Row Item" sap:VirtualizedContainerService.HintSize="434,190" sap2010:WorkflowViewState.IdRef="UpdateRowItem_12" Row="[CurrentRow]" Value="[&quot;Not Found&quot;]" />
+                </Sequence>
+              </If.Else>
+            </If>
           </Sequence>
         </ActivityAction>
       </ui:ForEachRow.Body>
